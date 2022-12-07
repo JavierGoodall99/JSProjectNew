@@ -84,33 +84,30 @@ JSON.parse(localStorage.getItem('products ')) : [
         imageURL: 'https://i.postimg.cc/L8yNtFW2/pexels-zukiman-mohamad-398467.jpg',
         type: 'Photograph'
     }
-]
+];
 
 
-// localStorage.setItem('items', JSON.stringify(items));
-let art = document.querySelector('.art')
-
-function display(){
+let tbody = document.querySelector('tbody');
+function displayAdmin(){
     products.forEach((item)=>{
-        art.innerHTML += `
-        <div class="card">
-        <img src="${item.imageURL}" alt="Image1">
-        <div class="card-body">
-          <h5 class="card-title">${item.name}</h5>
-          <p class="price">Price: R${item.price}</p>
-          <button class="purchase" onclick='purchaseProducts(${(item)})'>Purchase</button>
-        </div>
-      </div>`
+        tbody.innerHTML += `
+        <tr>
+        <th class="col-3"><span class="Type text-black">${item.type}</span></th>
+        <th class="col-3"><span class="Type text-black">${item.name}</span></th>
+        <th class="col-3"><span class="Type text-black">R${item.price}</span></th>
+        <th class="col-3"><span class="Type text-black"><button>Edit</button>
+        <button>Delete</button></span></th>
+        </tr>` 
     })
 }
-display();
+displayAdmin();
 
-// function checkoutProducts(item) {
-//     try{
-//         // Save the selected product into an array.
-//         CheckOutList.push(item);
-//         localStorage.setItem('checkout', JSON.stringify(CheckOutList));
-//     }catch(e) {
-//         console.log(`Error message: ${e.message}`);
-//     }
+
+// function deleteProduct(item) {
+//     let index = products.findIndex(a => {
+//         return a.id == item.id
+//     });
+//     products.splice(index, 1);
+//     localStorage.setItem('products', products);
+//     display();
 // }
