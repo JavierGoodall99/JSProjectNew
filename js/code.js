@@ -98,7 +98,8 @@ function display(){
         <div class="card-body">
           <h5 class="card-title">${item.name}</h5>
           <p class="price">Price: R${item.price}</p>
-          <button class="purchase" onclick='purchaseProducts(${(item)})'>Purchase</button>
+          <div class="purchase" onclick="purchaseProducts(${item.id})">Purchase
+          </div> 
         </div>
       </div>`
     })

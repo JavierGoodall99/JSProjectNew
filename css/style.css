@@ -159,3 +159,6 @@ button {
     margin-left: 1190px;
 }
 
+.fa-solid:hover {
+    color: white;
+}

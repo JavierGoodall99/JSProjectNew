@@ -95,19 +95,30 @@ function displayAdmin(){
         <th class="col-3"><span class="Type text-black">${item.type}</span></th>
         <th class="col-3"><span class="Type text-black">${item.name}</span></th>
         <th class="col-3"><span class="Type text-black">R${item.price}</span></th>
-        <th class="col-3"><span class="Type text-black"><button>Edit</button>
-        <button>Delete</button></span></th>
+        <th class="col-1"><span class="Type text-black">
+        <button><i class="fa-solid fa-trash"></i></button></span>
+        </th>
+        <th class="col-1"><button><i class="fa-solid fa-pen-to-square"></i></button></th>
         </tr>` 
     })
 }
 displayAdmin();
 
 
-// function deleteProduct(item) {
-//     let index = products.findIndex(a => {
-//         return a.id == item.id
-//     });
-//     products.splice(index, 1);
-//     localStorage.setItem('products', products);
-//     display();
-// }
+
+
+
+// function onDelete() {
+//         document.querySelector(".container").deleteRow(1);
+//     }
+
+    var index, table = document.querySelector(".container");
+    for(var i = 1; i < table.rows.length; i++)
+    {
+        table.rows[i].cells[3].onclick = function()
+        {
+                index = this.parentElement.rowIndex;
+                table.deleteRow(index);
+            }
+        };
+        
