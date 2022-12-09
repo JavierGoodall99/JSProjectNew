@@ -87,20 +87,22 @@ JSON.parse(localStorage.getItem('products ')) : [
 ];
 
 
-let tbody = document.querySelector('tbody');
+// let tbody = document.querySelector('tbody');
 function displayAdmin(){
-    products.forEach((item)=>{
-        tbody.innerHTML += `
+    Object.keys(products).forEach((item)=>{
+        document.querySelector('.products ').innerHTML += `
         <tr>
-        <th class="col-3"><span class="Type text-black">${item.type}</span></th>
-        <th class="col-3"><span class="Type text-black">${item.name}</span></th>
-        <th class="col-3"><span class="Type text-black">R${item.price}</span></th>
-        <th class="col-1"><span class="Type text-black">
-        <button><i class="fa-solid fa-trash"></i></button></span>
+        <th class="col-2"><span class="Type text-black">${products[item].id}</span></th>
+        <th class="col-2"><span class="Type text-black">${products[item].name}</span></th>
+        <th class="col-2"><span class="Type text-black">${products[item].type}</span></th>
+        <th class="col-2"><span class="Type text-black">R${products[item].price}</span></th>
+        <th class="col-2"><span class="Type text-black">
+        <button type="button" class="delete" onclick = "DeleteButton(${products[item].id})"><i class="fa-solid fa-trash"></i></button></span>
         </th>
-        <th class="col-1">
+        <th class="col-2"><span class="Type text-black">
         <button type="button" button id="edit-button" data-bs-toggle="modal" data-bs-target="#editProduct">
-        <i class="fa-solid fa-pen-to-square"></i>
+        <i class="fa-solid fa-pen-to-square"></i></span>
+        </th>
         </button>
         <!-- Modal -->
                         <div class="modal fade" id="editProduct" tabindex="-1" aria-labelledby="editProductLabel" aria-hidden="true">
@@ -113,10 +115,10 @@ function displayAdmin(){
                                 <div class="modal-body">
                                   <form class="form g-2">
                                     <div class="container">
-                                        <input class="form-control" type="text" id="type1" value='${item.type}' required>
-                                        <textarea class="form-control my-2" id="name1" required>${item.name}</textarea>
-                                        <input class="form-control" id="price1" type="number" value='${item.price}' required>
-                                        <input class="form-control my-2" id="imageURL1" type="url" value='${item.imageURL}' required>
+                                        <input class="form-control" type="text" id="type1" value='${products[item].type}'>
+                                        <textarea class="form-control my-2" id="name1" required>${products[item].name}</textarea>
+                                        <input class="form-control" id="price1" type="number" value='${products[item].price}'>
+                                        <input class="form-control my-2" id="imageURL1" type="url" value='${products[item].imageURL}'>
                                     </div>
                                   </form>
                                 </div>
@@ -127,10 +129,20 @@ function displayAdmin(){
                               </div>
                             </div>
                         </div>        
+
         </th>` 
     })
 }
 displayAdmin();
+localStorage.setItem('products ', JSON.stringify(products))
+
+function DeleteButton(id) {
+    localStorage.setItem('products ',JSON.stringify(products));
+    document.querySelector('#delete');
+    products.splice(id-1, 1)
+    location.reload()
+    localStorage.setItem('products ', JSON.stringify(products))
+}
 
 
 // Edit
@@ -147,35 +159,35 @@ displayAdmin();
 // }
 
 
-let save = document.querySelector('#save') 
+// let save = document.querySelector('#save') 
 
-console.log(Add.outerHTML);
+// console.log(Add.outerHTML);
 
-save.addEventListener('click', (e)=>{
-    e.preventDefault();
-    let id = document.querySelector('#id1').value;
-    let name = document.querySelector('#name1').value;
-    let price = document.querySelector('#price1').value;
-    let imageURL = document.querySelector('#imageURL1').value;
-    let type = document.querySelector('#type1').value;
+// save.addEventListener('click', (e)=>{
+//     e.preventDefault();
+//     let id = document.querySelector('#id1').value;
+//     let name = document.querySelector('#name1').value;
+//     let price = document.querySelector('#price1').value;
+//     let imageURL = document.querySelector('#imageURL1').value;
+//     let type = document.querySelector('#type1').value;
     
 
-    // Push an object into array
-    products.push(
-        {
-            id,
-            name,
-            price,
-            imageURL,
-            type
-        }
-    )
+//     // Push an object into array
+//     products.push(
+//         {
+//             id,
+//             name,
+//             price,
+//             imageURL,
+//             type
+//         }
+//     )
 
-    // Local Storage
-    localStorage.setItem('products ', JSON.stringify(products));
+//     // Local Storage
+//     localStorage.setItem('products ', JSON.stringify(products));
     
-    console.table(JSON.parse(localStorage.products));
-});
+//     console.table(JSON.parse(localStorage.products));
+// });
 
 
 
@@ -191,16 +203,6 @@ save.addEventListener('click', (e)=>{
 //         document.querySelector(".container").deleteRow(1);
 //     }
 
-    var index, table = document.querySelector(".container");
-    for(var i = 1; i < table.rows.length; i++)
-    {
-        table.rows[i].cells[3].onclick = function()
-        {
-                index = this.parentElement.rowIndex;
-                table.deleteRow(index);
-            }
-            localStorage.setItem('table', JSON.stringify(table));
-        };
         
 
         
@@ -228,6 +230,7 @@ save.addEventListener('click', (e)=>{
                 }
             )
         
+            location.reload()
             // Local Storage
             localStorage.setItem('products ', JSON.stringify(products));
             
@@ -235,16 +238,3 @@ save.addEventListener('click', (e)=>{
         });
 
 
-// const paragraph = document.querySelector("");
-// const edit_button = document.getElementById("edit-button");
-// const end_button = document.getElementById("end-editing");
-
-// edit_button.addEventListener("click", function() {
-//   paragraph.contentEditable = true;
-//   paragraph.style.backgroundColor = "#dddbdb";
-// } );
-
-// end_button.addEventListener("click", function() {
-//   paragraph.contentEditable = false;
-//   paragraph.style.backgroundColor = "#ffe44d";
-// } )

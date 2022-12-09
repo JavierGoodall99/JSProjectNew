@@ -107,6 +107,15 @@ function display(){
 display();
 
 
+function checkoutProducts(item) {
+    try{
+        // Save the selected product into an array.
+        CheckOutList.push(item);
+        localStorage.setItem('checkout', JSON.stringify(CheckOutList));
+    }catch(e) {
+        console.log(`Error message: ${e.message}`);
+    }
+}
 
 
 // function checkoutProducts(item) {
