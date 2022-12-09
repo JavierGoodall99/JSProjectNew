@@ -106,6 +106,9 @@ function display(){
 }
 display();
 
+
+
+
 // function checkoutProducts(item) {
 //     try{
 //         // Save the selected product into an array.

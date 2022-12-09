@@ -98,14 +98,93 @@ function displayAdmin(){
         <th class="col-1"><span class="Type text-black">
         <button><i class="fa-solid fa-trash"></i></button></span>
         </th>
-        <th class="col-1"><button><i class="fa-solid fa-pen-to-square"></i></button></th>
-        </tr>` 
+        <th class="col-1">
+        <button type="button" button id="edit-button" data-bs-toggle="modal" data-bs-target="#editProduct">
+        <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+        <!-- Modal -->
+                        <div class="modal fade" id="editProduct" tabindex="-1" aria-labelledby="editProductLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="editProductLabel">Edit Product</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <form class="form g-2">
+                                    <div class="container">
+                                        <input class="form-control" type="text" id="type1" value='${item.type}' required>
+                                        <textarea class="form-control my-2" id="name1" required>${item.name}</textarea>
+                                        <input class="form-control" id="price1" type="number" value='${item.price}' required>
+                                        <input class="form-control my-2" id="imageURL1" type="url" value='${item.imageURL}' required>
+                                    </div>
+                                  </form>
+                                </div>
+                                <div class="modal-footer my-2">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-success" id="Save">Save changes</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>        
+        </th>` 
     })
 }
 displayAdmin();
 
 
+// Edit
+// function EditProduct(name, price, imageURL, type) {
+//     products.push(
+//         {
+//             id,
+//             name,
+//             price,
+//             imageURL,
+//             type
+//         }
+//     )
+// }
 
+
+let save = document.querySelector('#save') 
+
+console.log(Add.outerHTML);
+
+save.addEventListener('click', (e)=>{
+    e.preventDefault();
+    let id = document.querySelector('#id1').value;
+    let name = document.querySelector('#name1').value;
+    let price = document.querySelector('#price1').value;
+    let imageURL = document.querySelector('#imageURL1').value;
+    let type = document.querySelector('#type1').value;
+    
+
+    // Push an object into array
+    products.push(
+        {
+            id,
+            name,
+            price,
+            imageURL,
+            type
+        }
+    )
+
+    // Local Storage
+    localStorage.setItem('products ', JSON.stringify(products));
+    
+    console.table(JSON.parse(localStorage.products));
+});
+
+
+
+// saveChanges(){
+//     var index = _.findIndex(this.price, (o) => o.id == this.itemIdToEdit)
+//     this.price[index].name = this.newText;
+//     this.newText = '';
+//     this.isShown = true;
+//   }
 
 
 // function onDelete() {
@@ -120,5 +199,52 @@ displayAdmin();
                 index = this.parentElement.rowIndex;
                 table.deleteRow(index);
             }
+            localStorage.setItem('table', JSON.stringify(table));
         };
         
+
+        
+        let Add = document.querySelector('.Add') 
+
+        console.log(Add.outerHTML);
+        
+        Add.addEventListener('click', (e)=>{
+            e.preventDefault();
+            let id = document.querySelector('#id').value;
+            let name = document.querySelector('#name').value;
+            let price = document.querySelector('#price').value;
+            let imageURL = document.querySelector('#imageURL').value;
+            let type = document.querySelector('#type').value;
+            
+        
+            // Push an object into array
+            products.push(
+                {
+                    id,
+                    name,
+                    price,
+                    imageURL,
+                    type
+                }
+            )
+        
+            // Local Storage
+            localStorage.setItem('products ', JSON.stringify(products));
+            
+            console.table(JSON.parse(localStorage.products));
+        });
+
+
+// const paragraph = document.querySelector("");
+// const edit_button = document.getElementById("edit-button");
+// const end_button = document.getElementById("end-editing");
+
+// edit_button.addEventListener("click", function() {
+//   paragraph.contentEditable = true;
+//   paragraph.style.backgroundColor = "#dddbdb";
+// } );
+
+// end_button.addEventListener("click", function() {
+//   paragraph.contentEditable = false;
+//   paragraph.style.backgroundColor = "#ffe44d";
+// } )

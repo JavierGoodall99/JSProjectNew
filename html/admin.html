@@ -15,7 +15,7 @@
 <body class="adminpage">
     <nav class="navbar navbar-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"><img src=https://i.postimg.cc/CKm46pDz/sculpture-1.png  alt="Bootstrap" width="100" height="80"></a>
+          <a class="navbar-brand" href="#"><img src=https://i.postimg.cc/CKm46pDz/sculpture-1.png class="logo"  alt="Bootstrap" width="100" height="80"></a>
           <button class="navbar-toggler bg-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -35,6 +35,9 @@
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="../html/admin.html">Admin</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="../html/form.html">Contact Us</a>
+              </li>
               </ul>
             </div>
           </div>
@@ -44,7 +47,7 @@
         <h1 class="AdminHeading">Admin</h1>
       </header>
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-dark modalButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button" class="btn btn-dark modalButton me-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Add Products
       </button>
   
@@ -57,32 +60,36 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <div class="input-group mb-3">
+            <span class="input-group-text bg-dark text-white" id="inputGroup-sizing-default">Id</span>
+            <input type="text" class="form-control" id="id" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
             <div class="input-group mb-3">
                 <span class="input-group-text bg-dark text-white" id="inputGroup-sizing-default">Type</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" class="form-control" id="type" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text bg-dark text-white" id="inputGroup-sizing-default">Name</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" class="form-control" id="name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text bg-dark text-white" id="inputGroup-sizing-default">Price</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="text" class="form-control" id="price" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
               </div>
               <div class="input-group mb-3">
-                <span class="form-label bg-black" for="customFile"></span>
-              <input type="file" class="form-control form-control-md" id="customFile"/>
+                <span class="input-group-text bg-dark text-white" id="inputGroup-sizing-default">Image</span>
+                <input type="text" class="form-control" id="imageURL" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
               </div> 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-dark">Add</button>
+          <button type="button" class="btn btn-dark Add">Add</button>
         </div>
       </div>
     </div>
   </div>
       <div class="table1">
-        <table class="container">
+        <table class="container mb-5">
             <tr class="row-12">
                 <th class="col-3"><span class="Type text-black">Type</span></th>
                 <th class="col-3"><span class="Type text-black">Name</span></th>
