@@ -1,5 +1,5 @@
-let products = JSON.parse(localStorage.getItem('products ')) ?
-JSON.parse(localStorage.getItem('products ')) : [
+let products = JSON.parse(localStorage.getItem('products')) ?
+JSON.parse(localStorage.getItem('products')) : [
     {
         id: 1,
         name: 'Broken Mind',
@@ -90,151 +90,90 @@ JSON.parse(localStorage.getItem('products ')) : [
 // let tbody = document.querySelector('tbody');
 function displayAdmin(){
     Object.keys(products).forEach((item)=>{
-        document.querySelector('.products ').innerHTML += `
+        document.querySelector('.products').innerHTML += `
         <tr>
         <th class="col-2"><span class="Type text-black">${products[item].id}</span></th>
-        <th class="col-2"><span class="Type text-black">${products[item].name}</span></th>
         <th class="col-2"><span class="Type text-black">${products[item].type}</span></th>
+        <th class="col-2"><span class="Type text-black">${products[item].name}</span></th>
         <th class="col-2"><span class="Type text-black">R${products[item].price}</span></th>
         <th class="col-2"><span class="Type text-black">
-        <button type="button" class="delete" onclick = "DeleteButton(${products[item].id})"><i class="fa-solid fa-trash"></i></button></span>
+            <button type="button" class="delete" onclick = "DeleteButton(${products[item].id})"><i class="fa-solid fa-trash"></i></button></span>
         </th>
         <th class="col-2"><span class="Type text-black">
-        <button type="button" button id="edit-button" data-bs-toggle="modal" data-bs-target="#editProduct">
-        <i class="fa-solid fa-pen-to-square"></i></span>
-        </th>
+            <button type="button" button id="edit-button" data-bs-toggle="modal" data-bs-target="#editProduct">
+                <i class="fa-solid fa-pen-to-square"></i></span>
+            </th>
         </button>
         <!-- Modal -->
-                        <div class="modal fade" id="editProduct" tabindex="-1" aria-labelledby="editProductLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h1 class="modal-title fs-5" id="editProductLabel">Edit Product</h1>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                  <form class="form g-2">
-                                    <div class="container">
-                                        <input class="form-control" type="text" id="type1" value='${products[item].type}'>
-                                        <textarea class="form-control my-2" id="name1" required>${products[item].name}</textarea>
-                                        <input class="form-control" id="price1" type="number" value='${products[item].price}'>
-                                        <input class="form-control my-2" id="imageURL1" type="url" value='${products[item].imageURL}'>
-                                    </div>
-                                  </form>
-                                </div>
-                                <div class="modal-footer my-2">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  <button type="button" class="btn btn-success" id="Save">Save changes</button>
-                                </div>
-                              </div>
+        <div class="modal fade" id="editProduct" tabindex="-1" aria-labelledby="editProductLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editProductLabel">Edit Product</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form g-2">
+                            <div class="container">
+                                <input class="form-control" type="text" id="type1" value='${products[item].type}' required>
+                                <textarea class="form-control my-2" id="name1">${products[item].name} required</textarea>
+                                <input class="form-control" id="price1" type="number" value='${products[item].price}' required>
+                                <input class="form-control my-2" id="imageURL1" type="url" value='${products[item].imageURL}' required>
                             </div>
-                        </div>        
-
-        </th>` 
+                        </form>
+                    </div>
+                    <div class="modal-footer my-2">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" id="Save">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </tr>` 
     })
 }
 displayAdmin();
-localStorage.setItem('products ', JSON.stringify(products))
+localStorage.setItem('products', JSON.stringify(products))
 
+
+// Delete Button 
 function DeleteButton(id) {
-    localStorage.setItem('products ',JSON.stringify(products));
+    localStorage.setItem('products',JSON.stringify(products));
     document.querySelector('#delete');
     products.splice(id-1, 1)
-    location.reload()
+    location.reload()    //Delete product, no need for reload
     localStorage.setItem('products ', JSON.stringify(products))
 }
 
 
-// Edit
-// function EditProduct(name, price, imageURL, type) {
-//     products.push(
-//         {
-//             id,
-//             name,
-//             price,
-//             imageURL,
-//             type
-//         }
-//     )
-// }
+//Add Button 
+let Add = document.querySelector('.Add') 
+console.log(Add.outerHTML);
+Add.addEventListener('click', (e)=>{
+    e.preventDefault();
+    let id = document.querySelector('#id').value;
+let name = document.querySelector('#name').value;
+let price = document.querySelector('#price').value;
+let imageURL = document.querySelector('#imageURL').value;
+let type = document.querySelector('#type').value;
 
 
-// let save = document.querySelector('#save') 
-
-// console.log(Add.outerHTML);
-
-// save.addEventListener('click', (e)=>{
-//     e.preventDefault();
-//     let id = document.querySelector('#id1').value;
-//     let name = document.querySelector('#name1').value;
-//     let price = document.querySelector('#price1').value;
-//     let imageURL = document.querySelector('#imageURL1').value;
-//     let type = document.querySelector('#type1').value;
+// Push an object into array
+products.push(
+    {
+        id,
+        name,
+        price,
+        imageURL,
+        type
+    }
+    )
     
-
-//     // Push an object into array
-//     products.push(
-//         {
-//             id,
-//             name,
-//             price,
-//             imageURL,
-//             type
-//         }
-//     )
-
-//     // Local Storage
-//     localStorage.setItem('products ', JSON.stringify(products));
+    location.reload()
     
-//     console.table(JSON.parse(localStorage.products));
-// });
-
-
-
-// saveChanges(){
-//     var index = _.findIndex(this.price, (o) => o.id == this.itemIdToEdit)
-//     this.price[index].name = this.newText;
-//     this.newText = '';
-//     this.isShown = true;
-//   }
-
-
-// function onDelete() {
-//         document.querySelector(".container").deleteRow(1);
-//     }
-
-        
-
-        
-        let Add = document.querySelector('.Add') 
-
-        console.log(Add.outerHTML);
-        
-        Add.addEventListener('click', (e)=>{
-            e.preventDefault();
-            let id = document.querySelector('#id').value;
-            let name = document.querySelector('#name').value;
-            let price = document.querySelector('#price').value;
-            let imageURL = document.querySelector('#imageURL').value;
-            let type = document.querySelector('#type').value;
-            
-        
-            // Push an object into array
-            products.push(
-                {
-                    id,
-                    name,
-                    price,
-                    imageURL,
-                    type
-                }
-            )
-        
-            location.reload()
-            // Local Storage
-            localStorage.setItem('products ', JSON.stringify(products));
-            
-            console.table(JSON.parse(localStorage.products));
-        });
+    // Local Storage
+    localStorage.setItem('products', JSON.stringify(products));
+    console.table(JSON.parse(localStorage.products));
+});
 
 

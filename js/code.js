@@ -1,5 +1,6 @@
-let products = JSON.parse(localStorage.getItem('products ')) ?
-JSON.parse(localStorage.getItem('products ')) : [
+let checkout = [];
+let products = JSON.parse(localStorage.getItem('products')) ?
+JSON.parse(localStorage.getItem('products')) : [
     {
         id: 1,
         name: 'Broken Mind',
@@ -87,6 +88,7 @@ JSON.parse(localStorage.getItem('products ')) : [
 ]
 
 
+
 // localStorage.setItem('items', JSON.stringify(items));
 let art = document.querySelector('.art')
 
@@ -96,34 +98,70 @@ function display(){
         <div class="card">
         <img src="${item.imageURL}" alt="Image1">
         <div class="card-body">
-          <h5 class="card-title">${item.name}</h5>
-          <p class="price">Price: R${item.price}</p>
-          <div class="purchase" onclick="purchaseProducts(${item.id})">Purchase
-          </div> 
+            <h5 class="card-title">${item.name}</h5>
+            <p class="price">Price: R${item.price}</p>
+            <button type="button" class="PurchaseButton" onclick='checkoutButton(${JSON.stringify(item)})'>Purchase</button>
         </div>
-      </div>`
+        </div>`
     })
 }
 display();
 
 
-function checkoutProducts(item) {
-    try{
-        // Save the selected product into an array.
-        CheckOutList.push(item);
-        localStorage.setItem('checkout', JSON.stringify(CheckOutList));
-    }catch(e) {
-        console.log(`Error message: ${e.message}`);
+
+function sortByType(type) {
+    art.innerHTML = ""
+    let filteredData = products.filter((item)=>{        
+        return item.type.toLowerCase() == type.toLowerCase();
+    }) 
+
+    for(let i = 0; i < filteredData.length; i++) {
+        
+        art.innerHTML += `
+            <div class="card">
+            <img src="${filteredData[i].imageURL}" alt="Image1">
+            <div class="card-body">
+                <h5 class="card-title">${filteredData[i].name}</h5>
+                <p class="price">Price: R${filteredData[i].price}</p>
+                <button type="button" class="PurchaseButton" onclick='checkoutButton(${JSON.stringify(filteredData)})'>Purchase</button>
+            </div>
+            </div>`
     }
+    
+    
 }
 
 
-// function checkoutProducts(item) {
-//     try{
-//         // Save the selected product into an array.
-//         CheckOutList.push(item);
-//         localStorage.setItem('checkout', JSON.stringify(CheckOutList));
-//     }catch(e) {
-//         console.log(`Error message: ${e.message}`);
-//     }
-// }
+
+// Photography Button
+let filterPhotography = document.querySelector('#filterPhotography') 
+filterPhotography.addEventListener('click', (e)=>{
+    e.preventDefault();
+    sortByType(document.getElementById("filterPhotography").value="Photograph")
+    // location.reload()
+});
+
+// Sculpture Button
+let filterSculptures = document.querySelector('#filterSculptures') 
+filterSculptures.addEventListener('click', (e)=>{
+    e.preventDefault();
+    sortByType(document.getElementById("filterSculptures").value = "Sculpture")
+    // location.reload()
+});
+
+// Paintings Button
+let filterPaintings = document.querySelector('#filterPaintings') 
+filterPaintings.addEventListener('click', (e)=>{
+    e.preventDefault();
+    sortByType(document.getElementById("filterPaintings").value="Painting")
+    // location.reload()
+});
+
+
+
+//CheckOut Button
+function checkoutButton(item) {
+    checkout.push(item);
+    console.log(checkout);
+    localStorage.setItem('checkoutPage', JSON.stringify(checkout));
+}
