@@ -142,8 +142,10 @@ function DeleteButton(id) {
     document.querySelector('#delete');
     products.splice(id-1, 1)
     location.reload()    //Delete product, no need for reload
-    localStorage.setItem('products ', JSON.stringify(products))
+    localStorage.setItem('products', JSON.stringify(products))
 }
+
+
 
 
 //Add Button 

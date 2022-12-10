@@ -6,9 +6,8 @@ function checkoutButton(){
         document.querySelector('.Checkout').innerHTML +=
         `<tr>
         <th class="col-3"><span class="Type text-black">${item.name}</span></th>
-        <th class="col-3"><span class="Type text-black">${''}</span></th>
+        <th class="col-3"><span class="Type text-black"><input type="text" id="screen"</span></th>
         <th class="col-3"><span class="Type text-black">${item.price}</span></th>
-        <th class="col-3"><span class="Type text-black"><button type="button" class="delete" onclick = "DeleteButton(${item})"><i class="fa-solid fa-trash"></i></button></span></th>
         </tr>
         `
       })
